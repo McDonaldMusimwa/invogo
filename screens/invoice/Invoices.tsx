@@ -1,63 +1,51 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 import { useState } from "react";
-import Paid from "./Paid";
-import AllInvoices from "./AllInvoices";
-import Unpaid from "./Unpaid";
 import ClearButton from "../../components/ui/ClearButton";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Octicons from "@expo/vector-icons/Octicons";
-import invoicesData from "../../const/Data";
+//import invoicesData from "../../const/Data";
 import Invoice from "../../components/ui/Invoice";
 import IInvoiceItem from "../../types/IInvoice";
 import colors from "../../const/Colors";
 import invoices from "../../const/Data";
-function Invoices() {
-  const [navigate, setNavigate] = useState("all");
-  let [allinvoices, setAllInvoices] = useState(invoices);
+import BlueButton from "../../components/ui/BlueButton";
 
+
+function Invoices({navigation}:any) {
+  let [allinvoices, setAllInvoices] = useState(invoices);
   const [filteredInvoices,setFilteredInvoices]= useState(allinvoices)
-  let screen;
+
+  
   const navigateHandlers = {
     navigateToUnpaid: () => {
       const invoices = allinvoices.filter((invoice) => invoice.status === "unpaid");
       setFilteredInvoices(invoices)
-      setNavigate("unpaid");
+      
     },
     navigateToPaid: () => {
       const invoices = allinvoices.filter((invoice) => invoice.status === "paid");
       setFilteredInvoices(invoices);
-      setNavigate("paid");
+ 
     },
     navigateToAll: () => {
       setFilteredInvoices(allinvoices)
-      setNavigate("all");
+    
     },
   };
-  //console.log(invoices);
-  switch (navigate) {
-    case "paid":
-      screen = <Paid invoices={filteredInvoices} />;
-      break;
-    case "unpaid":
-      screen = <Unpaid invoices={filteredInvoices} />;
-      break;
-    default:
-      screen = <AllInvoices invoices={filteredInvoices} />;
-      break;
-  }
 
 
-console.log({filteredInvoices,navigate})
+
 const renderItem = ({ item }: { item: IInvoiceItem }) => {
   const initialValue = 0;
   const subTotal = item.elements.reduce(
     (total: number, inv) => total + inv.units * inv.unitcost,
     initialValue
   );
-  const onPressNavigate=()=>{
-    navigate.navigate('InvoiceItem')
-  }
 
+const onPressNavigate=()=>{
+  console.log('line reached')
+  navigation.navigate('InvoiceItem')
+}
   return (
     <Invoice
       invoicenumber={item.invoicenumber}
@@ -68,11 +56,14 @@ const renderItem = ({ item }: { item: IInvoiceItem }) => {
     />
   );
 };
+
+
   return (
     <View style={styles.invoicesContainer}>
       <View style={styles.invoicesTop}>
         <SimpleLineIcons name="settings" size={24} color="black" />
         <Text>Your Invoices</Text>
+       
         <Octicons name="search" size={24} color="black" />
       </View>
       <View style={styles.invoicesNavigationContainer}>
@@ -86,6 +77,8 @@ const renderItem = ({ item }: { item: IInvoiceItem }) => {
           Paid
         </ClearButton>
       </View>
+
+      <View style={styles.buttonContainer} ><BlueButton onPressAction={()=>navigation.navigate('AddInvoice')}>Add Invoice</BlueButton></View>
       <View style={styles.invoicesSection}>
         <FlatList
           data={filteredInvoices}
@@ -93,10 +86,21 @@ const renderItem = ({ item }: { item: IInvoiceItem }) => {
           keyExtractor={(item) => item.invoicenumber.toString()}
         />
       </View>
+     
     </View>
   );
 }
+
+
+//styles
 const styles = StyleSheet.create({
+  buttonContainer:{
+    zIndex: 100,
+  
+   
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   invoicesTop: {
     flexDirection: "row",
     alignItems: "center",
@@ -113,6 +117,7 @@ const styles = StyleSheet.create({
   },
   invoicesSection: {
     backgroundColor: colors.gray,
+    zIndex:-1
   },
 });
 export default Invoices;

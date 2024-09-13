@@ -6,8 +6,10 @@ interface InvoiceType {
   status: string;
   subTotal: number;
   customer: string;
-  onPressAction:any
+onPressAction:any
 }
+
+
 function Invoice({ invoicenumber, status, subTotal, customer,onPressAction }: InvoiceType) {
   let statusFontStyle;
   if (status == "paid") {
@@ -15,6 +17,7 @@ function Invoice({ invoicenumber, status, subTotal, customer,onPressAction }: In
   } else {
     statusFontStyle = { color: colors.red };
   }
+  
   return (
     <Card>
       <Pressable style={styles.buttonStyle} onPress={onPressAction}>
