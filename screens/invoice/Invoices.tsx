@@ -44,7 +44,7 @@ const renderItem = ({ item }: { item: IInvoiceItem }) => {
 
 const onPressNavigate=()=>{
   console.log('line reached')
-  navigation.navigate('InvoiceItem')
+  navigation.navigate('InvoiceItem',{invoicenumber:item.invoicenumber})
 }
   return (
     <Invoice
