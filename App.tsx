@@ -4,7 +4,7 @@ import Invoices from "./screens/invoice/Invoices";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import InvoiceItem from "./components/ui/InvoiceItem";
-import AddInvoice from "./screens/invoice/AddInvoice";
+import AddInvoice from "./screens/invoice/AddInvoiceScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
