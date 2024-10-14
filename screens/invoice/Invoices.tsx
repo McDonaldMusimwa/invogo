@@ -78,7 +78,9 @@ const onPressNavigate=()=>{
         </ClearButton>
       </View>
 
-      <View style={styles.buttonContainer} ><BlueButton onPressAction={()=>navigation.navigate('AddInvoice')}>Add Invoice</BlueButton></View>
+      <View style={styles.buttonContainer} >
+        <BlueButton onPressAction={()=>navigation.navigate('AddInvoice')}>Add Job +</BlueButton>
+      </View>
       <View style={styles.invoicesSection}>
         <FlatList
           data={filteredInvoices}
@@ -95,11 +97,12 @@ const onPressNavigate=()=>{
 //styles
 const styles = StyleSheet.create({
   buttonContainer:{
+    position: 'absolute',
+    bottom: 100,
+    left: 0,
     zIndex: 100,
-  
-   
-    justifyContent: 'center',
     alignItems: 'center',
+    padding: 10, // Adjust padding as needed
   },
   invoicesTop: {
     flexDirection: "row",

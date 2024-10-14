@@ -19,7 +19,7 @@ function AllInvoices({ invoices }: any) {
             subTotal={subTotal}
             status={invoice.status}
             customer={invoice.customer}
-          />
+           onPressAction={()=>{console.log("invoice clicked")}}/>
         );
       })}
     </View>
