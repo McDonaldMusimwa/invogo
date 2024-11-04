@@ -1,7 +1,11 @@
 import { View,Text } from "react-native"
 function AddInvoice(){
 
-    return(<View><Text>Add</Text></View>)
+    return(<View>
+        
+        <Text>Add</Text>
+        
+        </View>)
 }
 
 
