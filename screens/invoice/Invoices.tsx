@@ -11,7 +11,7 @@ import invoices from "../../const/Data";
 import BlueButton from "../../components/ui/BlueButton";
 import { Dimensions } from "react-native";
 const width = Dimensions.get("window").width;
-console.log(width);
+
 function Invoices({ navigation }: any) {
   let [allinvoices, setAllInvoices] = useState(invoices);
   const [filteredInvoices, setFilteredInvoices] = useState(allinvoices);
@@ -92,6 +92,7 @@ function Invoices({ navigation }: any) {
           keyExtractor={(item) => item.invoicenumber.toString()}
         />
       </View>
+      
     </View>
   );
 }
